@@ -1,4 +1,4 @@
-module Part1 where
+module Part2 where
 
 import Lib
 
@@ -9,4 +9,7 @@ main = do
     print r
 
 calculateFuel :: Int -> Int
-calculateFuel mass = mass `div` 3 - 2
+calculateFuel mass
+    | fuel <= 0 = 0
+    | otherwise = fuel + calculateFuel fuel
+    where fuel = mass `div` 3 - 2
