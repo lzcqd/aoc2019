@@ -1,4 +1,4 @@
-module Part1 where
+module Main where
 
 import Lib
 

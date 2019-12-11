@@ -21,14 +21,16 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- split
+- lens
 
 library:
   source-dirs: src
 
 executables:
-  aoc2019-exe:
-    main:                Main.hs
-    source-dirs:         app
+  day1-part1-exe:
+    main:                Part1.hs
+    source-dirs:         app/day1
     ghc-options:
     - -threaded
     - -rtsopts
@@ -36,6 +38,15 @@ executables:
     dependencies:
     - aoc2019
 
+  day2-part1-exe:
+    main:                Part1.hs
+    source-dirs:         app/day2
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - aoc2019
 tests:
   aoc2019-test:
     main:                Spec.hs
