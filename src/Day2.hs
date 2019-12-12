@@ -23,7 +23,3 @@ execute codes i
           param idx = codes !! (codes !! idx)
           binaryOp f = replaceIdx codes (codes !! (i+3)) (f (param (i+1)) (param (i+2)))
           compute g = execute (binaryOp g) (i+4)
-
-replaceIdx :: [Int] -> Int -> Int -> [Int]
-replaceIdx a idx v = f ++ [v] ++ xs
-                     where (f, _ : xs) = splitAt idx a

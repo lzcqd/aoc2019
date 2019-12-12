@@ -1,5 +1,6 @@
 module Lib
-    ( stringToInt
+    ( stringToInt,
+      replaceIdx
     ) where
 
 stringToInt :: String -> Int
