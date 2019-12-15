@@ -1,7 +1,6 @@
-{-# LANGUAGE TupleSections #-}
-
 module Day3 (
-    part1
+    part1,
+    part2
 ) where
 
 import Lib
@@ -17,14 +16,20 @@ part1 = do
     let m2 = getMap (splitOn "," w2) (0,0)
     let intersects = Map.keys (Map.intersection m1 m2)
     print (minimum (map (\p -> abs (fst p) + abs (snd p)) intersects))
-    
+ 
+part2 :: IO ()
+part2 = do
+    f <- readFile "src/inputs/day3/input.txt"
+    let [w1, w2] = lines f
+    let m1 = getMap (splitOn "," w1) (0,0)
+    let m2 = getMap (splitOn "," w2) (0,0)
+    print (minimum (Map.elems (Map.intersectionWith (+) m1 m2)))
 
-getMap :: [String] -> Point -> Map.Map Point Bool
+getMap :: [String] -> Point -> Map.Map Point Int
 getMap [] _ = Map.empty
-getMap (x:xs) start = let p = getP x start 
-                          m = getMap xs (last p)
-                          mapEntries = map (, True) p 
-                          in Map.union (Map.fromList mapEntries) m 
+getMap (x:xs) start = let p = zip (getP x start) [1..] 
+                          m = Map.map (length p +) (getMap xs (fst (last p)))
+                          in Map.union (Map.fromList p) m 
 
 getP :: String -> Point -> [Point]
 getP step p 
