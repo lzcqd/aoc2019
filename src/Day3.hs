@@ -12,8 +12,8 @@ part1 :: IO ()
 part1 = do
     f <- readFile "src/inputs/day3/input.txt"
     let [w1, w2] = lines f
-    let m1 = getMap (splitOn "," w1) (0,0)
-    let m2 = getMap (splitOn "," w2) (0,0)
+    let m1 = getMap (splitOn "," w1) (0,0) 1
+    let m2 = getMap (splitOn "," w2) (0,0) 1
     let intersects = Map.keys (Map.intersection m1 m2)
     print (minimum (map (\p -> abs (fst p) + abs (snd p)) intersects))
  
@@ -21,15 +21,15 @@ part2 :: IO ()
 part2 = do
     f <- readFile "src/inputs/day3/input.txt"
     let [w1, w2] = lines f
-    let m1 = getMap (splitOn "," w1) (0,0)
-    let m2 = getMap (splitOn "," w2) (0,0)
+    let m1 = getMap (splitOn "," w1) (0,0) 1
+    let m2 = getMap (splitOn "," w2) (0,0) 1
     print (minimum (Map.elems (Map.intersectionWith (+) m1 m2)))
 
-getMap :: [String] -> Point -> Map.Map Point Int
-getMap [] _ = Map.empty
-getMap (x:xs) start = let p = zip (getP x start) [1..] 
-                          m = Map.map (length p +) (getMap xs (fst (last p)))
-                          in Map.union (Map.fromList p) m 
+getMap :: [String] -> Point -> Int -> Map.Map Point Int
+getMap [] _ _ = Map.empty
+getMap (x:xs) start stepCount = let p = zip (getP x start) [stepCount..] 
+                                    m = getMap xs (fst (last p)) (stepCount + length p)
+                                    in Map.union (Map.fromList p) m 
 
 getP :: String -> Point -> [Point]
 getP step p 
