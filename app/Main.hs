@@ -20,4 +20,5 @@ run arg
     | arg == "d3p1" = Day3.part1
     | arg == "d3p2" = Day3.part2
     | arg == "d4p1" = Day4.part1
+    | arg == "d4p2" = Day4.part2
     | otherwise = putStr "not yet done"
