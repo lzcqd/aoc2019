@@ -4,6 +4,7 @@ import System.Environment
 import Day1
 import Day2
 import Day3
+import Day4
 
 main :: IO()
 main = do
@@ -18,4 +19,5 @@ run arg
     | arg == "d2p2" = Day2.part2
     | arg == "d3p1" = Day3.part1
     | arg == "d3p2" = Day3.part2
+    | arg == "d4p1" = Day4.part1
     | otherwise = putStr "not yet done"
